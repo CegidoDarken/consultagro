@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <title>Detalle de pedido</title>
+</head>
+<style>
+    tbody tr {
+        text-align: center;
+    }
+
+    tfoot tr {
+        text-align: end !important;
+    }
+</style>
+
+<body>
+    <table class="table table-bordered table-striped">
+        <thead class="bg-success" style="text-align: center;">
+            <tr>
+                <th class="text-light">IMAGEN</th>
+                <th class="text-light">PRODUCTO</th>
+                <th class="text-light">CATIDAD</th>
+                <th class="text-light">PRECIO UNITARIO</th>
+                <th class="text-light">QUITAR</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <img src="https://agripac.com.ec/wp-content/uploads/2020/11/4001120-1-1200x1200.jpg.jpg" alt="pamon"
+                        width="60">
+                </td>
+                <td>IMPULSE</td>
+                <td>
+                    <div class="input-group">
+                        <input value="1" type="number" class="form-control" aria-label="Username"
+                            aria-describedby="basic-addon1">
+                    </div>
+                </td>
+                <td>$5.99</td>
+                <td>
+                    <button type="button" class="btn btn-primary btn-sm">
+                        <svg class="icon" width="20" height="20" fill="white">
+                            <use xlink:href="/icons/bootstrap-icons.svg#trash" />
+                        </svg>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="https://agripac.com.ec/wp-content/uploads/2020/11/sonata.jpg" alt="sonata" width="60">
+                </td>
+                <td>SONATA </td>
+                <td>
+                    <div class="input-group">
+                        <input value="1" type="number" class="form-control" aria-label="Username"
+                            aria-describedby="basic-addon1">
+                    </div>
+                </td>
+                <td>$9.99</td>
+                <td>
+                    <button type="button" class="btn btn-primary btn-sm">
+                        <svg class="icon" width="20" height="20" fill="white">
+                            <use xlink:href="/icons/bootstrap-icons.svg#trash" />
+                        </svg>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="https://agripac.com.ec/wp-content/uploads/2020/11/pamon.jpg"
+                        alt="pamona" width="60">
+                </td>
+                <td>PAMONA</td>
+                <td>
+                    <div class="input-group">
+                        <input value="1" type="number" class="form-control" aria-label="Username"
+                            aria-describedby="basic-addon1">
+                    </div>
+                </td>
+                <td>$15.99</td>
+                <td>
+                    <button type="button" class="btn btn-primary btn-sm">
+                        <svg class="icon" width="20" height="20" fill="white">
+                            <use xlink:href="/icons/bootstrap-icons.svg#trash" />
+                        </svg>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr class="border-0">
+                <td class="border-0"></td>
+                <td class="border-0"></td>
+                <td class="border-0" colspan="3">
+                    <table class="table table-borderless table-sm">
+                        <tr>
+                            <td style="font-weight: bold;">Subtotal:</td>
+                            <td>$31.97</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold;">IVA 12%:</td>
+                            <td>$3.84</td>
+                        </tr>
+                        <tr>
+                            <td style="font-size: larger;font-weight: bold;background-color: antiquewhite;">Total:</td>
+                            <td style="background-color: antiquewhite;">$35.80</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+    <div class="d-grid gap-2 col-6 mx-auto">
+        <button class="btn btn-primary" type="button">REALIZAR PEDIDO</button>
+        <button class="btn btn-secondary" type="button">SEGUIR VIENDO</button>
+      </div>
+</body>
+
+</html>

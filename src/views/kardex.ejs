@@ -1,0 +1,189 @@
+<%- include("partials/_headerpanel") %>
+    <link rel="stylesheet" href="/css/dataTables.bootstrap5.min.css">
+    <script src="/js/dataTables.bootstrap5.min.js"></script>
+    <style>
+        .fl-table:first-child thead th:first-child {
+            width: 125px !important;
+            background-color: #146c45;
+            border-left: 1px solid #E6E4E4;
+        }
+
+        .fl-table:first-child thead th {
+            border-left: 1px solid wheat;
+            width: 180px !important;
+            background-color: #146c45;
+        }
+
+        div.dataTables_filter input {
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px !important;
+            margin-top: 10px !important;
+            margin-bottom: 10px !important;
+        }
+
+        .fl-table tbody {
+            width: auto !important;
+        }
+
+        @media (max-width: 767px) {
+            .fl-table {
+                width: auto !important;
+            }
+
+            .head {
+                display: none;
+            }
+
+            .fl-table:first-child thead th:first-child {
+                height: auto !important;
+                width: auto !important;
+            }
+
+            .fl-table:first-child thead th {
+                height: auto !important;
+                width: auto !important;
+            }
+
+            .fl-table tbody {
+                width: auto !important;
+            }
+
+            .fl-table tbody td {
+                height: 31.5px !important;
+                width: auto !important;
+            }
+        }
+    </style>
+    <div class="col d-flex flex-column h-sm-100 pt-3">
+        <div class="row  overflow-auto">
+            <form class="row g-3 needs-validation" novalidate>
+                <div class="col-md-4">
+                    <div class="form-floating shadow">
+                        <input type="email" class="form-control" id="articulo" value="PAMONA" readonly>
+                        <label for="articulo">Articulo</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-floating shadow">
+                        <input type="email" class="form-control" id="floatingInputValue" value="PD4" readonly>
+                        <label for="floatingInputValue">Código</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-floating shadow">
+                        <input type="email" class="form-control" id="floatingInputValue" value="Agripac" readonly>
+                        <label for="floatingInputValue">Poveedor</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-floating shadow">
+                        <input type="email" class="form-control" id="floatingInputValue" value="Bodega #1" readonly>
+                        <label for="floatingInputValue">Ubicación</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-floating shadow">
+                        <input type="number" class="form-control" id="floatingInputValue" value="12" readonly>
+                        <label for="floatingInputValue">Min</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-floating shadow">
+                        <input type="number" class="form-control" id="floatingInputValue" value="150" readonly>
+                        <label for="floatingInputValue">Max</label>
+                    </div>
+                </div>
+                <div class="container mt-3">
+                    <div class="input-group rounded shadow">
+                        <div class="form-floating ">
+                            <input type="email" class="tablesearch-input form-control" id="floatingInput"
+                                placeholder="name@example.com" data-tablesearch-table="#datatable">
+                            <label for="floatingInput">Buscar</label>
+                        </div>
+                        <span class="input-group-text border-0" id="search-addon">
+                            <i class="fas fa-search"> <svg class="icon m-2" width="20" height="20" fill="currentColor">
+                                    <use xlink:href="/icons/bootstrap-icons.svg#search" />
+                                </svg></i>
+                        </span>
+                    </div>
+                </div>
+            </form>
+            <div class="table-wrapper mt-3">
+                <table class="table table table-hover fl-table shadow tablesort" id="datatable">
+                    <thead>
+                        <tr>
+                            <th colspan="2"></th>
+                            <th colspan="3" class="text-light"><svg class="icon" width="20" height="20"
+                                    fill="currentColor">
+                                    <use xlink:href="/icons/bootstrap-icons.svg#arrow-down" />
+                                </svg> ENTRADAS</th>
+                            <th colspan="3" class="text-light"><svg class="icon" width="20" height="20"
+                                    fill="currentColor">
+                                    <use xlink:href="/icons/bootstrap-icons.svg#arrow-up" />
+                                </svg> SALIDAS</th>
+                            <th colspan="3" class="text-light"><svg class="icon" width="20" height="20"
+                                    fill="currentColor">
+                                    <use xlink:href="/icons/bootstrap-icons.svg#boxes" />
+                                </svg> EXISTECIAS</th>
+                        </tr>
+                        <tr class="text-light" style="background-color: #146c45;">
+                            <th class="text-light"><svg class="icon" width="20" height="20" fill="currentColor">
+                                    <use xlink:href="/icons/bootstrap-icons.svg#calendar" />
+                                </svg> FECHA</th>
+                            <th data-tablesort-type="string" class="text-light"><svg class="icon" width="20" height="20"
+                                    fill="currentColor">
+                                    <use xlink:href="/icons/bootstrap-icons.svg#file-text" />
+                                </svg> DETALLE</th>
+                            <th>CANTIDAD</th>
+                            <th>PRECIO UNIDAD</th>
+                            <th>PRECIO TOTAL</th>
+                            <th>CANTIDAD</th>
+                            <th>PRECIO UNIDAD</th>
+                            <th>PRECIO TOTAL</th>
+                            <th>CANTIDAD</th>
+                            <th>PRECIO UNIDAD</th>
+                            <th>PRECIO TOTAL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>09/10/2020</td>
+                            <td>Registro de compra</td>
+                            <td>250</td>
+                            <td>$9.99</td>
+                            <td>$2.497,5</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>250</td>
+                            <td>$9.99</td>
+                            <td>$2.497,5</td>
+                        </tr>
+                        <tr>
+                            <td>09/10/2020</td>
+                            <td>Registro de pedido</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>12</td>
+                            <td>$9.99</td>
+                            <td>$119,88</td>
+                            <td>238</td>
+                            <td>$9.99</td>
+                            <td>$2.377,62</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    </body>
+
+    <script>
+        $(document).ready(function () {
+            $('#datatable').DataTable( {
+          "lengthChange": false
+        } );
+        });
+    </script>
+
+    </html>

@@ -1,0 +1,280 @@
+<%- include("partials/_headerpanel") %>
+    <style>
+        #inner-message {
+            position: fixed;
+            bottom: 5px;
+            right: 2%;
+            width: 50%;
+        }
+
+        .w-mid {
+            animation: 4s ease blink infinite;
+            animation-delay: 0.4s;
+        }
+
+        .w-bottom {
+            animation: 4s ease blink infinite;
+        }
+
+        .w-top {
+            animation: 4s ease blink infinite;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes blink {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .chain-bottom {
+            animation: 4s ease chainBottom infinite alternate;
+        }
+
+        .chain-top {
+            animation: 4s ease chainTop infinite alternate;
+        }
+        @keyframes chainBottom {
+            from {
+                transform: translate(-3px, 3px);
+            }
+
+            to {
+                transform: translate(0, 0);
+            }
+        }
+
+        @keyframes chainTop {
+            from {
+                transform: translate(3px, -3px);
+            }
+
+            to {
+                transform: translate(0, 0);
+            }
+        }
+
+        .online {
+            animation: mymove 4s infinite;
+        }
+
+        @keyframes mymove {
+            50% {
+                box-shadow: 10px 20px 30px rgba(31, 111, 64, 0.5);
+            }
+        }
+    </style>
+    <div class="col d-flex flex-column h-sm-100 pt-3">
+        <div class="row overflow-auto">
+            <div id="estado">
+                <% if (isConnected) { %>
+                    <div class="card text-center shadow">
+                        <div class="row g-0">
+                            <div class="col-md-4 p-3 align-self-center">
+                                <svg class="online rounded-circle p-3" width="200" height="200"
+                                    viewBox="0 0 50 50" fill="none">
+                                    <path class="piece w-top"
+                                        d="M2.0835 18.75L6.25016 22.9167C16.6043 12.5625 33.396 12.5625 43.7502 22.9167L47.9168 18.75C35.271 6.10417 14.7502 6.10417 2.0835 18.75Z"
+                                        fill="#1f6f40" />
+                                    <path class="piece w-mid"
+                                        d="M10.4165 27.0835L14.5832 31.2502C17.3466 28.489 21.0933 26.938 24.9998 26.938C28.9063 26.938 32.653 28.489 35.4165 31.2502L39.5832 27.0835C31.5415 19.0418 18.479 19.0418 10.4165 27.0835Z"
+                                        fill="#1f6f40" />
+                                    <path class="piece w-bottom"
+                                        d="M18.667 35.1513L24.917 41.4013L31.167 35.1513C30.347 34.3292 29.3729 33.6769 28.3004 33.2318C27.2279 32.7867 26.0782 32.5576 24.917 32.5576C23.7558 32.5576 22.6061 32.7867 21.5336 33.2318C20.4611 33.6769 19.487 34.3292 18.667 35.1513Z"
+                                        fill="#1f6f40" />
+                                </svg>
+                            </div>
+                            <div class="col-md-8 ">
+                                <div class="card-body">
+                                    <div class="row row-cols-1 row-cols-lg-2">
+                                        <div class="col">
+                                            <div class="card text-center mb-3 mt-3 shadow">
+                                                <div class="card-body">
+                                                    <svg class="icon m-3" width="100" height="100" fill="#1f6f40">
+                                                        <use xlink:href="/icons/bootstrap-icons.svg#upc-scan" />
+                                                    </svg>
+                                                    <h5 class="card-title text-uppercase">Escanear producto</h5>
+                                                    <p class="card-text">Al escanear el producto, podremos recopilar la
+                                                        información necesaria y brindarte una experiencia personalizada.
+                                                    </p>
+                                                    <a href="#" id="escanear" class="btn btn-primary text-uppercase"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#escanearModal">Empezar</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <!--<div class="card text-center mb-3 shadow">
+                                                <div class="card-body">
+                                                    <h5 class="card-title text-uppercase">Asignar producto</h5>
+                                                    <p class="card-text">Al escanear el producto, te ofrecemos la
+                                                        posibilidad de editar la información del TAG del producto. Esto
+                                                        te permitirá actualizar y ajustar los detalles según sea
+                                                        necesario.</p>
+                                                    <a href="#" class="btn btn-primary">Empezar</a>
+                                                </div>
+                                            </div>-->
+                                        </div>
+                                    </div>
+                                    <div class="modal fade" id="escanearModal" tabindex="-1"
+                                        aria-labelledby="escanearModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h3 class="modal-title fs-5 text-uppercase" id="escanearModalLabel">¡Escanea el producto para mostrar su información detallada!</h3>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body ">
+                                                    <div class="card text-center border-0   ">
+                                                        <div class="card-body">
+                                                            <div id="message">
+                                                                <img src="images/rfid.gif"
+                                                                    style="width: 35%;height: 30%;" alt="...">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="inner-message" class="alert alert-success text-lg-start w-auto">
+                                        </div>
+                                    </div>
+                                    <form style="visibility: hidden;" id="formulario" class="needs-validation"
+                                        novalidate>
+                                        <div class="input-group mb-3 has-validation">
+                                            <div class="form-floating">
+                                                <input type="number" class="form-control" id="validationTooltip02"
+                                                    name="tag" maxlength="12" required>
+                                                <div class="invalid-tooltip">
+                                                    Campo incompleto
+                                                </div>
+                                                <label for="validationTooltip02">
+                                                    Registar nuevo Tag
+                                                </label>
+                                            </div>
+                                            <button class="btn btn-outline-primary" type="submit">Registrar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <% } else { %>
+                            <div class="card text-center shadow-lg">
+                                <div class="card-header text-danger text-uppercase">
+                                    <h1>Desconectado</h1>
+                                </div>
+                                <br>
+                                <img src="images/usb.gif" style="width: 35%;height: 30%;" class="align-self-center"
+                                    alt="...">
+                                <div class="card-body">
+                                    <h2 class="card-title text-uppercase">No se ha encontrado ningún Sensor RFID</h2>
+                                    <p class="card-text">Para continuar con el proceso de registro de productos, te
+                                        pedimos
+                                        amablemente que conectes un sensor a tu PC. El sensor nos permitirá recopilar
+                                        datos
+                                        importantes del producto que deseas registrar, lo cual nos ayudará a brindarte
+                                        una
+                                        experiencia personalizada y completa. Agradecemos tu colaboración y estamos
+                                        entusiasmados por poder asistirte en este proceso. Si necesitas alguna ayuda
+                                        adicional durante la conexión del sensor, nuestro equipo de soporte estará
+                                        encantado
+                                        de brindarte la asistencia necesaria. ¡Gracias por elegir nuestro sistema de
+                                        registro y por tu participación activa!</p>
+                                    <a href="" onClick="window.location.reload();" class="btn btn-primary">
+                                        <svg class="icon" width="20" height="20" fill="currentColor">
+                                            <use xlink:href="/icons/bootstrap-icons.svg#arrow-clockwise" />
+                                        </svg> Reintentar</a>
+                                </div>
+                            </div>
+                            <% } %>
+                    </div>
+            </div>
+        </div>
+    </div>
+    </body>
+    <script>
+        // escanear starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+            var forms = document.querySelectorAll('.needs-validation')
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+        $('#inner-message').fadeOut(1);
+        const socket = io();
+        document.getElementById('formulario').addEventListener('submit', (event) => {
+            event.preventDefault();
+            const tag = document.getElementsByName('tag')[0].value;
+            socket.emit('formulario:data', tag);
+            document.getElementById('formulario').reset();
+        });
+        document.getElementById('escanear').addEventListener('click', (event) => {
+            socket.emit('estado:data', 'l');
+        });
+        socket.on("test:data", function (data) {
+            console.log(data);
+        });
+        socket.on("arduino:data", function (data) {
+            console.log(data);
+            document.getElementById("inner-message").innerHTML = `<svg class="icon" width="20" height="20" fill="currentColor">
+                            <use xlink:href="/icons/bootstrap-icons.svg#check-circle-fill" />
+                        </svg><strong> Se ha escaneado exitosamente</strong>`;
+            $('#inner-message').fadeIn(1000);
+            setTimeout(function () {
+                $('#inner-message').fadeOut(1000);
+            }, 3000);
+            if (data.value == "Producto no reconocido") {
+                document.getElementById("message").innerHTML = `<h3 class="text-uppercase"><span class="badge bg-danger text-uppercase m-2">${data.value}</span></h3>`;
+                document.getElementById("formulario").style.visibility = "visible";
+            } else {
+                document.getElementById("formulario").style.visibility = "hidden";
+                document.getElementById("message").innerHTML = `<div class="card mb-3" ><div class="row g-0"><div class="col-md-2"><img src="${data.imagen}" width="100"  class="img-fluid rounded-start" alt="${data.nombre}"></div><div class="col-md-8"><div class="card-body"><h5 class="card-title text-uppercase">${data.nombre} <span class="badge bg-success rounded-pill">${data.categoria}</span></h5><p class="card-text">${data.descripcion}</p><p class="card-text"><div class="text-body-secondary">Código: ${data.codigo}</div></p></div></div></div></div>`;
+            }
+        });
+        $('#escanearModal').on('hidden.bs.modal', function () {
+            document.getElementById("message").innerHTML = `<img src="images/rfid.gif"style="width: 35%;height: 30%;"class="align-self-center" alt="...">`;
+        })
+        socket.on("estado:data", function (data) {
+            console.log(data);
+            if (data.estado === "Conectado") {
+                document.getElementById("estado").innerHTML = `<div class="card text-center shadow-lg">
+                        <div class="row g-0">
+                            <div class="col-md-4 p-3">
+                                <img src="images/rfid.gif" class="img-fluid rounded-start">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h1 class="card-title text-success text-uppercase">Conectado</h1>
+                                    <p class="card-text">Te invitamos a escanear un producto utilizando nuestro sistema
+                                        RFID para avanzar en el proceso de registro. Al escanear el producto, podremos
+                                        recopilar la información necesaria y brindarte una experiencia personalizada.
+                                        Agradecemos tu colaboración y estamos emocionados de tener la oportunidad de
+                                        servirte. ¡Gracias por elegir nuestro sistema de registro basado en RFID!
+                                    </p>
+                                    <div id="message">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+            } else {
+                $('#escanearModal').modal('hide');
+                document.getElementById("estado").innerHTML = `<div class="card text-center shadow-lg"><div class="card-header text-danger text-uppercase"><h1>Desconectado</h1></div><br><img src="images/usb.gif" style="width: 35%;height: 30%;" class="align-self-center"alt="..."><div class="card-body"><h2 class="card-title text-uppercase">No se ha encontrado ningún Sensor RFID</h2><p class="card-text">Para continuar con el proceso de registro de productos, tepedimos amablemente que conectes un sensor a tu PC. El sensor nos permitirá recopilar datos importantes del producto que deseas registrar, lo cual nos ayudará a brindarte una experiencia personalizada y completa. Agradecemos tu colaboración y estamos entusiasmados por poder asistirte en este proceso. Si necesitas alguna ayuda adicional durante la conexión del sensor, nuestro equipo de soporte estará encantado de brindarte la asistencia necesaria. ¡Gracias por elegir nuestro sistema de registro y por tu participación activa!</p> <a href="" onClick="window.location.reload();" class="btn btn-primary"><svg class="icon" width="20" height="20" fill="currentColor"><use xlink:href="/icons/bootstrap-icons.svg#arrow-clockwise" /></svg> Reintentar</a></div></div>`;
+            }
+
+        });
+    </script>
+
+    </html>

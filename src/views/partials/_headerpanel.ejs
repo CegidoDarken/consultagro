@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+
+    .table-wrapper thead th {
+        position: sticky;
+        top: 0;
+    }
+
+    .fl-table {
+        border-radius: 5px;
+        font-size: 12px;
+        font-weight: normal;
+        border: none;
+        border-collapse: collapse;
+        width: 100%;
+        max-width: 100%;
+        white-space: nowrap;
+        background-color: white;
+    }
+
+    .fl-table td,
+    .fl-table th {
+        text-align: left;
+        padding: 8px;
+    }
+
+    .fl-table td {
+        font-size: 12px;
+        border-left: 1px solid #E6E4E4 !important;
+    }
+
+    .fl-table thead th {
+        color: #ffffff;
+        background: #198754;
+        cursor: pointer;
+    }
+
+
+    .fl-table thead th:nth-child(odd) {
+        color: #ffffff;
+        background: #198754;
+    }
+
+    .fl-table tr:nth-child(even) {
+        background: #c1e4d4;
+    }
+
+    @media (max-width: 767px) {
+        .fl-table {
+            display: block;
+            width: 100%;
+        }
+
+        .table-wrapper:before {
+            content: "Scroll horizontally >";
+            display: block;
+            text-align: right;
+            font-size: 11px;
+            color: white;
+            padding: 0 0 10px;
+        }
+
+        .fl-table thead,
+        .fl-table tbody,
+        .fl-table thead th {
+            display: block;
+        }
+
+        .fl-table thead th:last-child {
+            border-bottom: none;
+        }
+
+        .fl-table thead {
+            float: left;
+        }
+
+        .fl-table tbody {
+            width: auto;
+            position: relative;
+            overflow-x: auto;
+        }
+
+        .fl-table thead td,
+        .fl-table thead th {
+            padding: 20px .625em .625em .625em;
+            height: 60px;
+            vertical-align: middle;
+            box-sizing: border-box;
+            overflow-x: hidden;
+            overflow-y: auto;
+            width: 120px;
+            font-size: 13px;
+            text-overflow: ellipsis;
+        }
+
+        .fl-table td,
+        .fl-table th {
+            padding: 20px .625em .625em .625em;
+            height: 60px;
+            vertical-align: middle;
+            box-sizing: border-box;
+            overflow-x: hidden;
+            overflow-y: auto;
+            width: 100%;
+            font-size: 13px;
+            text-overflow: ellipsis;
+        }
+
+        .fl-table thead th {
+            text-align: left;
+            border-bottom: 1px solid #f7f7f9;
+        }
+
+        .fl-table tbody tr {
+            display: table-cell;
+        }
+
+        .fl-table tbody tr:nth-child(odd) {
+            background: #c1e4d4;
+        }
+
+        .fl-table tr:nth-child(even) {
+            background: #c1e4d4;
+        }
+
+        .fl-table tr td:nth-child(odd) {
+            background: #F8F8F8;
+            border: 1px solid #E6E4E4;
+        }
+
+        .fl-table tr td:nth-child(even) {
+            border: 1px solid #E6E4E4;
+        }
+
+        .fl-table tbody td {
+            display: block;
+            text-align: justify;
+        }
+    }
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/socket.io.min.js"></script>
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/chart.min.js"></script>
+    <script src="/js/jquery.dataTables.min.js"></script>
+    <title>Principal</title>
+</head>
+
+<body>
+    <div class="container-fluid overflow-hidden">
+        <div class="row vh-100 overflow-auto">
+            <div class="col-12 col-sm-3 col-xl-2 px-sm-2 px-0 bg-dark d-flex sticky-top">
+                <div
+                    class="d-flex flex-sm-column flex-row flex-grow-1 align-items-center align-items-sm-start px-3 pt-2 text-white">
+                    <ul class="nav nav-pills flex-sm-column flex-row flex-nowrap flex-shrink-1 flex-sm-grow-0 flex-grow-1 mb-sm-auto mb-0 justify-content-lg-start align-items-center align-items-sm-start"
+                        id="menu">
+                        <li class="nav-item">
+                            <a href="/panel" class="nav-link px-sm-0 px-2">
+                                <svg class="icon" width="20" height="20" fill="white">
+                                    <use xlink:href="/icons/bootstrap-icons.svg#house-door-fill" />
+                                </svg>
+                                <i class="fs-5 bi-house"></i><span class="ms-1 d-none d-sm-inline"
+                                    style="color: white;">Panel</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/analisis" class="nav-link px-sm-0 px-2">
+                                <svg class="icon" width="20" height="20" fill="white">
+                                    <use xlink:href="/icons/bootstrap-icons.svg#bar-chart-line-fill" />
+                                </svg>
+                                <i class="fs-5 bi-speedometer2"></i><span class="ms-1 d-none d-sm-inline"
+                                    style="color: white;">Análisis</span> </a>
+                        </li>
+                        <li>
+                            <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-sm-0 px-2">
+                                <svg class="icon" width="20" height="20" fill="white">
+                                    <use xlink:href="/icons/bootstrap-icons.svg#people-fill" />
+                                </svg>
+                                <i class="fs-5 bi-speedometer2"></i><span class="ms-1 d-none d-sm-inline"
+                                    style="color: white;">Proveedores</span> </a>
+                        </li>
+                        <li>
+                            <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-sm-0 px-2">
+                                <svg class="icon" width="20" height="20" fill="white">
+                                    <use xlink:href="/icons/bootstrap-icons.svg#person-fill" />
+                                </svg>
+                                <i class="fs-5 bi-speedometer2"></i><span class="ms-1 d-none d-sm-inline"
+                                    style="color: white;">Clientes</span> </a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" style="color: white;" class="nav-link dropdown-toggle px-sm-0 px-1"
+                                id="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                <svg class="icon" width="20" height="20" fill="white">
+                                    <use xlink:href="/icons/bootstrap-icons.svg#file-earmark-text-fill" />
+                                </svg>
+                                <i class="fs-5 bi-bootstrap"></i><span style="color: white;"
+                                    class="ms-1 d-none d-sm-inline">Reportes</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdown">
+                                <li><a class="dropdown-item" href="/kardex">Kardex</a></li>
+                                <li><a class="dropdown-item" href="/pedidos">Pedidos</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" style="color: white;" class="nav-link dropdown-toggle px-sm-0 px-1"
+                                id="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                <svg class="icon" width="20" height="20" fill="white">
+                                    <use xlink:href="/icons/bootstrap-icons.svg#box-seam-fill" />
+                                </svg>
+                                <i class="fs-5 bi-bootstrap"></i><span style="color: white;"
+                                    class="ms-1 d-none d-sm-inline">Productos</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdown">
+                                <li><a class="dropdown-item" href="/registrarproductos">Registar producto</a></li>
+                                <li><a class="dropdown-item" href="#">Administar productos</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="dropdown py-sm-4 mt-sm-auto ms-auto ms-sm-0 flex-shrink-1">
+                        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                            id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <svg class="icon" width="20" height="20" fill="white">
+                                <use xlink:href="/icons/bootstrap-icons.svg#person-circle" />
+                            </svg>
+                            <span class="d-none d-sm-inline mx-1">Nombre usuario</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                            <li><a class="dropdown-item" href="#">Configuración</a></li>
+                            <li><a class="dropdown-item" href="#">Perfil</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>

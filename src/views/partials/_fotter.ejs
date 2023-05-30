@@ -1,0 +1,40 @@
+<script src="/js/themes.js"></script>
+<script>
+    Translate();
+    document.addEventListener("DOMContentLoaded", function () {
+        navbar = document.querySelector('.navbar');
+        if (navbar) {
+            var last_scroll_top = 0;
+            window.addEventListener('scroll', function () {
+                let scroll_top = window.scrollY;
+                if (scroll_top < last_scroll_top) {
+                    $('.navbar-collapse').collapse('hide');
+                    $('.dropdown-menu').collapse('hide');
+                }
+                else {
+                    $('.navbar-collapse').collapse('hide');
+                    $('.dropdown-menu').collapse('hide');
+                }
+                last_scroll_top = scroll_top;
+            });
+        }
+
+    });
+</script>
+<% if(credentials){ %>
+    <script>
+        Array.from(document.getElementsByClassName("credentials-container")).forEach(
+            function (element, index, array) {
+                element.style.display = "block";
+            }
+        );
+        document.getElementById('authentication').setAttribute("key", "sign-out"); document.getElementById('authentication').setAttribute("onclick", "SignOut()");</script>
+    <% }else {%>
+        <script>
+            Array.from(document.getElementsByClassName("credentials-container")).forEach(
+                function (element, index, array) {
+                    element.style.display = "none";
+                }
+            );
+            document.getElementById('authentication').setAttribute("key", "sign-in"); document.getElementById('authentication').setAttribute("onclick", "SignUp()");</script>
+        <% }%>

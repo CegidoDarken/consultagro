@@ -1,0 +1,299 @@
+<%- include("partials/_headerpanel") %>
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .label {
+            position: absolute;
+            font-weight: bold;
+            font-size: 6vh;
+        }
+    </style>
+    <div class="col d-flex flex-column h-sm-100 pt-3">
+
+        <div class="row row-cols-1 row-cols-lg-4">
+            <div class="col mb-2">
+                <div class="card bg-danger text-light" style="height: 150px;">
+                    <div style="height: 60px;position: relative;bottom: -88px;">
+                        <canvas class="card-img" id="cv1"></canvas>
+                    </div>
+                    <div class="card-img-overlay">
+                        <h5 class="card-title text-uppercase">Pedidos de hoy</h5>
+                        <p class="card-text">
+                        <h3>$132.12</h3>
+                        </p>
+                        <p class="card-text"><small>Última actualización hace 3 minutos</small></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-2">
+                <div class="card bg-warning text-light" style="height: 150px;">
+                    <div style="height: 60px;position: relative;bottom: -88px;">
+                        <canvas class="card-img" id="cv2"></canvas>
+                    </div>
+                    <div class="card-img-overlay">
+                        <h5 class="card-title text-uppercase">Devoluciones de hoy</h5>
+                        <p class="card-text">
+                        <h3>-$200.32</h3>
+                        </p>
+                        <p class="card-text"><small>Última actualización hace 3 minutos</small></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-2">
+                <div class="card bg-primary text-light" style="height: 150px;">
+                    <div style="height: 60px;position: relative;bottom: -88px;">
+                        <canvas class="card-img" id="cv3"></canvas>
+                    </div>
+                    <div class="card-img-overlay">
+                        <h5 class="card-title">Ganancias totales</h5>
+                        <p class="card-text">
+                        <h3>$12,000.23</h3>
+                        </p>
+                        <p class="card-text"><small>Última actualización hace 3 minutos</small></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-2">
+                <div class="card bg-success text-light" style="height: 150px;">
+                    <div style="height: 60px;position: relative;bottom: -88px;">
+                        <canvas class="card-img" id="cv4"></canvas>
+                    </div>
+                    <div class="card-img-overlay">
+                        <h5 class="card-title">Productos vendidos</h5>
+                        <p class="card-text">
+                        <h3>$4,820.50</h3>
+                        </p>
+                        <p class="card-text"><small>Última actualización hace 3 minutos</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row row-cols-1 row-cols-lg-2">
+            <div class="col mb-2">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">Estado de ordenes</h5>
+                        <p class="card-text">Estado del pedido y seguimiento. Realice un seguimiento de su pedido desde
+                            la fecha de envío hasta la llegada. Para comenzar, ingrese su número de pedido.</p>
+                        <p class="card-text"><small class="text-body-secondary">Última actualización hace 3
+                                minutos</small></p>
+                    </div>
+                    <section class="container">
+                        <canvas class="card-img p-4" id="cv5"></canvas>
+                    </section>
+
+                </div>
+            </div>
+            <div class="col">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title">ÓRDENES RECIENTES</h5>
+                        <p class="card-text">Una orden son las instrucciones de un inversionista a un corredor o firma
+                            de corretaje para comprar o vender</p>
+                        <p class="card-text"><small class="text-body-secondary">Última actualización hace 3
+                                minutos</small></p>
+                    </div>
+                    <section class="container" style="height: 500px !important;">
+                        <canvas class="card-img" id="cv6"></canvas>
+                        <p class="label">83%</p>
+                    </section>
+
+                </div>
+            </div>
+        </div>
+        <br>
+        </body>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+        <script>
+            const cv1 = document.getElementById('cv1');
+
+            new Chart(cv1, {
+                type: 'line',
+                data: {
+                    labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Novienbre', 'Diciembre'],
+                    datasets: [{
+                        label: 'Aprobados',
+                        data: [12, 19, 3, 5, 2, 3, 5, 3, 12, 32, 3, 5],
+                        borderColor: "rgba(218, 218, 218, 0.5)",
+                        backgroundColor: "rgba(255, 255, 255, 0.2)",
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    elements: {
+                        point: {
+                            radius: 0,
+                        }
+                    },
+                    plugins: {
+                        legend: false // Hide legend
+                    },
+                    scales: {
+                        y: {
+                            display: false // Hide Y axis labels
+                        },
+                        x: {
+                            display: false // Hide X axis labels
+                        }
+                    }
+                }
+            });
+
+            const cv2 = document.getElementById('cv2');
+            new Chart(cv2, {
+                type: 'line',
+                data: {
+                    labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Septiembre', 'Octubre', 'Novienbre', 'Diciembre'],
+                    datasets: [{
+                        label: 'Aprobados',
+                        data: [3, 6, 3, 5, 2, 3, 5, 3, 3, 3, 3, 5],
+                        borderColor: "rgba(218, 218, 218, 0.5)",
+                        backgroundColor: "rgba(255, 255, 255, 0.2)",
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    elements: {
+                        point: {
+                            radius: 0,
+                        }
+                    },
+                    plugins: {
+                        legend: false // Hide legend
+                    },
+                    scales: {
+                        y: {
+                            display: false // Hide Y axis labels
+                        },
+                        x: {
+                            display: false // Hide X axis labels
+                        }
+                    }
+                }
+            });
+            const cv3 = document.getElementById('cv3');
+            new Chart(cv3, {
+                type: 'line',
+                data: {
+                    labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Septiembre', 'Octubre', 'Novienbre', 'Diciembre'],
+                    datasets: [{
+                        label: 'Aprobados',
+                        data: [2, 1, 5, 6, 3, 7, 6, 9, 4, 2, 3, 1],
+                        borderColor: "rgba(218, 218, 218, 0.5)",
+                        backgroundColor: "rgba(255, 255, 255, 0.2)",
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    elements: {
+                        point: {
+                            radius: 0,
+                        }
+                    },
+                    plugins: {
+                        legend: false // Hide legend
+                    },
+                    scales: {
+                        y: {
+                            display: false // Hide Y axis labels
+                        },
+                        x: {
+                            display: false // Hide X axis labels
+                        }
+                    }
+                }
+            });
+            const cv4 = document.getElementById('cv4');
+            new Chart(cv4, {
+                type: 'line',
+                data: {
+                    labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Septiembre', 'Octubre', 'Novienbre', 'Diciembre'],
+                    datasets: [{
+                        label: 'Aprobados',
+                        data: [2, 8, 2, 6, 9, 2, 1, 6, 4, 2, 8, 3],
+                        borderColor: "rgba(218, 218, 218, 0.5)",
+                        backgroundColor: "rgba(255, 255, 255, 0.2)",
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    elements: {
+                        point: {
+                            radius: 0,
+                        }
+                    },
+                    plugins: {
+                        legend: false // Hide legend
+                    },
+                    scales: {
+                        y: {
+                            display: false // Hide Y axis labels
+                        },
+                        x: {
+                            display: false // Hide X axis labels
+                        }
+                    }
+                }
+            });
+            const cv5 = document.getElementById('cv5');
+            new Chart(cv5, {
+                type: 'bar',
+                data: {
+                    labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Novienbre', 'Diciembre'],
+                    datasets: [{
+                        label: 'Aprobados',
+                        data: [31, 63, 32, 52, 45, 36, 24, 36, 23, 54, 46, 52],
+                        backgroundColor: "#1391D8",
+                    },
+                    {
+                        label: 'Pendientes',
+                        data: [34, 22, 73, 12, 32, 33, 34, 46, 36, 75, 34, 39],
+                        backgroundColor: "#D8C313",
+                    },
+                    {
+                        label: 'Rechazados',
+                        data: [43, 61, 34, 32, 27, 23, 52, 54, 39, 24, 26, 48],
+                        backgroundColor: "#D84613",
+                    }]
+                },
+
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                }
+            });
+            const cv6 = document.getElementById('cv6');
+            new Chart(cv6, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Entregado', 'Cancelado'],
+                    datasets: [{
+                        label: 'Pedidos',
+                        data: [5238, 3476],
+                        backgroundColor: ["#1391D8", "#D84613"],
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                }
+            });
+            
+        </script>
+
+        </html>

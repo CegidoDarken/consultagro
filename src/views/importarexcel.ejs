@@ -1,0 +1,385 @@
+<style>
+    .files input {
+        outline: 2px dashed #92b0b3;
+        outline-offset: -10px;
+        -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
+        transition: outline-offset .15s ease-in-out, background-color .15s linear;
+        padding: 120px 0px 85px 30%;
+        text-align: center !important;
+        margin: 0;
+        width: 100%;
+    }
+
+    .files input:focus {
+        outline: 2px dashed #92b0b3;
+        outline-offset: -10px;
+        -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
+        transition: outline-offset .15s ease-in-out, background-color .15s linear;
+        border: 1px solid #92b0b3;
+    }
+
+    .files {
+        position: relative
+    }
+
+    .files:after {
+        pointer-events: none;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 50px;
+        right: 0;
+        height: 50px;
+        content: "";
+        background-image: url(images/upload.png);
+        display: block;
+        margin: 0 auto;
+        background-size: 100%;
+        background-repeat: no-repeat;
+    }
+
+    .color input {
+        background-color: #f1f1f1;
+    }
+
+    .files:before {
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+        pointer-events: none;
+        width: 100%;
+        right: 0;
+        height: 57px;
+        content: " o arrástrelo aquí. ";
+        display: block;
+        margin: 0 auto;
+        color: #379ad9;
+        font-weight: 600;
+        text-transform: capitalize;
+        text-align: center;
+    }
+
+    input[type="file"] {
+        font-size: small;
+    }
+</style>
+<%- include("partials/_headerpanel") %>
+    <div class="col d-flex flex-column h-sm-100 pt-3">
+        <div class="row  overflow-auto">
+            <div class="accordion accordion-flush mb-3" id="document">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#documentarget" aria-expanded="false" aria-controls="documentarget">
+                            <svg class="icon m-2" width="20" height="20" fill="currentColor">
+                                <use xlink:href="/icons/bootstrap-icons.svg#filetype-xlsx" />
+                            </svg> Archivo
+                        </button>
+                    </h2>
+                    <div id="documentarget" class="accordion-collapse collapse show" data-bs-parent="#document">
+                        <div class="accordion-body">
+                            <div class="container text-center" style="width: 600px;
+                        max-width: calc(100% - 20px);
+                        margin: 0 auto;
+                        padding: 0 10px;">
+                                <form action="/importarexcel" method="post" enctype="multipart/form-data">
+                                    <div class="form-group files color">
+                                        <input class="form-control" type="file" name="file" accept=".xlsx, .xls"
+                                            onchange="form.submit()">
+                                    </div>
+                                </form>
+                                <br>
+                            </div>
+                            <div class="table-wrapper">
+                                <table class="table table-hover fl-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <th>Tamaño</th>
+                                            <th>Tipo</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <% if (fileStats) { %>
+                                                    <%= fileStats.name %>
+                                                        <% } else { %>
+                                                            <% } %>
+                                            </td>
+                                            <td>
+                                                <% if (fileStats) { %>
+                                                    <%= fileStats.size %>
+                                                        <% } else { %>
+                                                            <% } %>
+                                            </td>
+                                            <td>
+                                                <% if (fileStats) { %>
+                                                    <%= fileStats.type %>
+                                                        <% } else { %>
+                                                            <% } %>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                            <svg class="icon m-2" width="20" height="20" fill="currentColor">
+                                <use xlink:href="/icons/bootstrap-icons.svg#grid" />
+                            </svg>Resultados
+                        </button>
+                    </h2>
+                    <div id="flush-collapseOne" class="accordion-collapse collapse show"
+                        data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="row row-cols-1 row-cols-lg-4">
+                                <div class="col">
+                                    <div class="card m-1 text-white bg-warning shadow ">
+                                        <div class="row g-0 p-2 justify-content-center">
+                                            <div class="col-md-4 align-self-center p-1">
+                                                <svg class="icon" width="60" height="60" fill="white">
+                                                    <use
+                                                        xlink:href="/icons/bootstrap-icons.svg#file-earmark-spreadsheet-fill" />
+                                                </svg>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="card-body p-2">
+                                                    <h5 class="card-title">Facturas</h5>
+                                                    <p class="card-text fs-1 fw-bold" id="facturas">
+                                                        <% if (data) { %>
+                                                            <%= data.length %>
+                                                                <% } else { %>
+                                                                    0
+                                                                    <% } %>
+                                                    </p>
+                                                    <div class="text-end">
+                                                        <div class="btn-group align-items-end">
+                                                            <button type="button" class="btn btn-light dropdown-toggle"
+                                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                                Opciones
+                                                            </button>
+                                                            <ul class="dropdown-menu">
+                                                                <li><a class="dropdown-item" href=""
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#facturasModal">Ver más</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card m-1 bg-danger text-white shadow ">
+                                        <div class="row g-0 p-2 justify-content-center">
+                                            <div class="col-md-4 align-self-center p-1">
+                                                <svg class="icon" width="60" height="60" fill="white">
+                                                    <use xlink:href="/icons/bootstrap-icons.svg#box-fill" />
+                                                </svg>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="card-body p-2">
+                                                    <h5 class="card-title">Productos</h5>
+                                                    <p class="card-text fs-1 fw-bold" id="productos">
+                                                        <% if (productos) { %>
+                                                            <%= productos.length %>
+                                                                <% } else { %>
+                                                                    0
+                                                                    <% } %>
+                                                    </p>
+                                                    <div class="text-end">
+                                                        <div class="btn-group align-items-end">
+                                                            <button type="button" class="btn btn-light dropdown-toggle"
+                                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                                Opciones
+                                                            </button>
+                                                            <ul class="dropdown-menu">
+                                                                <li><a class="dropdown-item" href=""
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#productosModal">Ver más</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card m-1 text-white bg-primary shadow">
+                                        <div class="row g-0 p-2 justify-content-center">
+                                            <div class="col-md-4 align-self-center">
+                                                <svg class="icon" width="60" height="60" fill="white">
+                                                    <use xlink:href="/icons/bootstrap-icons.svg#person-fill" />
+                                                </svg>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="card-body p-2">
+                                                    <h5 class="card-title">Clientes</h5>
+                                                    <p class="card-text fs-1 fw-bold" id="clientes">
+                                                        <% if (clientes) { %>
+                                                            <%= clientes.length %>
+                                                                <% } else { %>
+                                                                    0
+                                                                    <% } %>
+                                                    </p>
+                                                    <div class="text-end">
+                                                        <div class="btn-group align-items-end">
+                                                            <button type="button" class="btn btn-light dropdown-toggle"
+                                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                                Opciones
+                                                            </button>
+                                                            <ul class="dropdown-menu">
+                                                                <li><a class="dropdown-item" href="#"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#clientesModal">Ver más</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="facturasModal" tabindex="-1" aria-labelledby="facturasModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-fullscreen">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="facturasModalLabel">Facturas</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body p-0">
+                                <% if (data) { %>
+                                    <div class="table-wrapper mx-1 my-1" style="overflow: visible;">
+                                        <table class="table table-hover fl-table">
+                                            <thead>
+                                                <tr>
+                                                    <% Object.keys(data[0]).forEach(header=> { %>
+                                                        <th>
+                                                            <%= header %>
+                                                        </th>
+                                                        <% }); %>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% data.forEach(row=> { %>
+                                                    <tr>
+                                                        <% Object.values(row).forEach(value=> { %>
+                                                            <td>
+                                                                <%= value %>
+                                                            </td>
+                                                            <% }); %>
+                                                    </tr>
+                                                    <% }); %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <% } else { %>
+                                        <center>No hay datos disponibles.</center>
+                                        <% } %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="clientesModal" tabindex="-1" aria-labelledby="clientesModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-fullscreen">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="clientesModalLabel">Clientes</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body p-0">
+                                <% if (clientes) { %>
+                                    <div class="table-wrapper mx-1 my-1">
+                                        <table class="table table-hover fl-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nombre</th>
+                                                    <th>Dirección</th>
+                                                    <th>RUC</th>
+                                                    <th>Télefono</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% clientes.forEach(row=> { %>
+                                                    <tr>
+                                                        <% Object.values(row).forEach(value=> { %>
+                                                            <td>
+                                                                <%= value %>
+                                                            </td>
+                                                            <% }); %>
+                                                    </tr>
+                                                    <% }); %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <% } else { %>
+                                        <center>No hay datos disponibles.</center>
+                                        <% } %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="productosModal" tabindex="-1" aria-labelledby="productosModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-fullscreen">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="productosModalLabel">Productos</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body p-0">
+                                <% if (productos) { %>
+                                    <div class="table-wrapper mx-1 my-1">
+                                        <table class="table table-hover fl-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Código</th>
+                                                    <th>Descripción</th>
+                                                    <th>Unidad</th>
+                                                    <th>Precio</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% productos.forEach(row=> { %>
+                                                    <tr>
+                                                        <% Object.values(row).forEach(value=> { %>
+                                                            <td>
+                                                                <%= value %>
+                                                            </td>
+                                                            <% }); %>
+                                                    </tr>
+                                                    <% }); %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <% } else { %>
+                                        <center>No hay datos disponibles.</center>
+                                        <% } %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </body>
+
+</html>
